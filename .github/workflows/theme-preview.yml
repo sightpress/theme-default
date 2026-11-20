@@ -12,4 +12,4 @@ jobs:
   preview:
     uses: sightpress/theme-interface/.github/workflows/theme-preview.yml@0.2.1
     with:
-      composer-root-version: 0.1.x-dev
+      composer-root-version: 0.2.x-dev

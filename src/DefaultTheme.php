@@ -19,7 +19,7 @@ final class DefaultTheme implements ThemeInterface
     public const string ID = 'default';
 
     /** The theme's version; release-please keeps it equal to the package's and to theme.json's. */
-    public const string VERSION = '0.1.0'; // x-release-please-version
+    public const string VERSION = '0.2.0'; // x-release-please-version
 
     public function manifest(): ThemeManifest
     {

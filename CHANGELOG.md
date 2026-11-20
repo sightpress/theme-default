@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/sightpress/theme-default/compare/0.1.0...0.2.0) (2026-11-20)
+
+
+### Features
+
+* include core's head partial in the shell, as theme-interface requires (T-1) ([#4](https://github.com/sightpress/theme-default/issues/4)) ([4bc1c54](https://github.com/sightpress/theme-default/commit/4bc1c54e6680489ef55ec2b7f119088f9656ce3c))
+
 ## 0.1.0 (2026-11-20)
 
 
