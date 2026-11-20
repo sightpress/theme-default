@@ -6,6 +6,12 @@ name: Release Please
 on:
   push:
     branches: [main]
+  # Attach the preview and screenshots to an existing release again.
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: The release tag, for example 0.1.0
+        required: true
 
 permissions:
   contents: write
@@ -13,6 +19,7 @@ permissions:
 
 jobs:
   release-please:
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
@@ -24,6 +31,11 @@ jobs:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
 
+  packagist:
+    name: update Packagist
+    needs: release-please
+    runs-on: ubuntu-latest
+    steps:
       # Packagist has no GitHub hook for this package, so tell it about every push to main and any tag just created.
       # Uses the org's Packagist "safe" API token, which can only trigger package updates.
       - name: Update Packagist
@@ -40,15 +52,15 @@ jobs:
   assets:
     name: preview and screenshots on the release
     needs: release-please
-    if: ${{ needs.release-please.outputs.release_created == 'true' }}
+    if: ${{ !cancelled() && (needs.release-please.outputs.release_created == 'true' || github.event_name == 'workflow_dispatch') }}
     runs-on: ubuntu-latest
     env:
       COMPOSER_ROOT_VERSION: 0.1.x-dev
-      TAG: ${{ needs.release-please.outputs.tag_name }}
+      TAG: ${{ needs.release-please.outputs.tag_name || inputs.tag }}
     steps:
       - uses: actions/checkout@v7
         with:
-          ref: ${{ needs.release-please.outputs.tag_name }}
+          ref: ${{ env.TAG }}
 
       - uses: shivammathur/setup-php@v2
         with:
