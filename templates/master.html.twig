@@ -17,6 +17,9 @@
 
     Submenus of the main menu are nested lists, all shown without JavaScript; js/site.js turns them into disclosure
     buttons ("Show the pages under About", `aria-expanded`), which Escape closes.
+    `<head>` includes core's head partial (`@seo/head.html.twig`: description, canonical and alternate links, Open
+    Graph, JSON-LD, icons), which every theme must include; `ignore missing` keeps the theme working with a core that
+    doesn't have it yet.
     Blocks: `title`, `head`, `brand`, `breadcrumbs`, `main`, `footer`, `scripts`.
 #}
 {%- set lang = locale|default(current_locale()) -%}
@@ -30,6 +33,7 @@
 <title>{% if form is defined and form.errors is not empty %}{{ t('Error:') }} {% endif %}{% if document_title is defined and document_title %}{{ document_title }}{% else %}{% block title %}{% endblock %} - {{ site_name }}{% endif %}</title>
 <link rel="stylesheet" href="{{ asset('tokens.css') }}">
 <link rel="stylesheet" href="{{ asset('css/site.css') }}">
+{% include '@seo/head.html.twig' ignore missing %}
 {% block head %}{% endblock %}
 </head>
 <body>

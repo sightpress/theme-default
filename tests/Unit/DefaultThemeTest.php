@@ -9,6 +9,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use SightPress\Theme\LayoutDefinition;
+use SightPress\Theme\Template\CorePartial;
 use SightPress\Theme\Template\RequiredTemplates;
 use SightPress\Theme\ThemeSchema;
 use SightPress\ThemeDefault\DefaultTheme;
@@ -59,6 +60,13 @@ final class DefaultThemeTest extends TestCase
     public function testEveryRequiredTemplateIsThere(string $file): void
     {
         self::assertFileExists(new DefaultTheme()->paths()->templates() . '/' . $file);
+    }
+
+    public function testTheShellIncludesCoresHeadPartial(): void
+    {
+        $master = (string) file_get_contents(new DefaultTheme()->paths()->templates() . '/' . RequiredTemplates::MASTER);
+
+        self::assertStringContainsString("{% include '" . CorePartial::Head->value . "'", $master);
     }
 
     public function testTheThemeShipsNoScreenshotOrPreviewOutput(): void
