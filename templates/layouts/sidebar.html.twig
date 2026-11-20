@@ -1,0 +1,30 @@
+{#
+    Sidebar layout: the page title as the only <h1> and the lead, then `content` at a reading width with a side column
+    beside it. The side column is an <aside> named by its heading (the `aside` block core fills, for example the pages
+    in this section, starting with an <h2 id="page-aside-title">); without anything in it there is no side column. On
+    narrow screens and at 200% zoom the side column follows the content.
+    Context: `title` (required), `lead` (optional), `updated_at` (optional, UTC).
+#}
+{% extends 'master.html.twig' %}
+{% block title %}{{ title }}{% endblock %}
+{% block main %}
+{%- set side = block('aside') is defined ? block('aside')|trim : '' %}
+<div class="container layout-sidebar{% if side %} layout-sidebar--with-aside{% endif %}">
+    <div class="layout-sidebar__main">
+        <h1>{{ title }}</h1>
+        {%- if lead is defined and lead is not empty %}
+        <p class="lead">{{ lead }}</p>
+        {%- endif %}
+        {% block content %}{% endblock %}
+        {%- if updated_at is defined and updated_at %}
+        <p class="page-updated">{{ t('Last updated') }} <time datetime="{{ updated_at|date('Y-m-d\\TH:i:s\\Z', 'UTC') }}">{{ updated_at|user_date }}</time></p>
+        {%- endif %}
+    </div>
+    {%- if side %}
+    <aside class="layout-sidebar__aside" aria-labelledby="page-aside-title">
+        {{ side|raw }}
+    </aside>
+    {%- endif %}
+</div>
+{% endblock %}
+{% block aside %}{% endblock %}

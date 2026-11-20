@@ -25,7 +25,7 @@ final class DefaultThemeTest extends TestCase
         self::assertSame('SightPress Default', $manifest->name);
         self::assertSame(DefaultTheme::VERSION, $manifest->version);
         self::assertSame('^0.2', $manifest->requires->constraint);
-        self::assertSame(LayoutDefinition::REQUIRED, array_map(static fn (LayoutDefinition $layout): string => $layout->id, $manifest->layouts));
+        self::assertSame([...LayoutDefinition::REQUIRED, ...LayoutDefinition::STANDARD], array_map(static fn (LayoutDefinition $layout): string => $layout->id, $manifest->layouts));
         self::assertTrue($manifest->rightToLeft);
         self::assertNotNull($manifest->previewDescription);
         self::assertNull($manifest->screenshot);
@@ -60,6 +60,19 @@ final class DefaultThemeTest extends TestCase
     public function testEveryRequiredTemplateIsThere(string $file): void
     {
         self::assertFileExists(new DefaultTheme()->paths()->templates() . '/' . $file);
+    }
+
+    public function testEveryLayoutOfTheManifestHasItsTemplateWithItsBlocks(): void
+    {
+        foreach (new DefaultTheme()->manifest()->layouts as $layout) {
+            $definition = RequiredTemplates::forLayout($layout);
+            $file = new DefaultTheme()->paths()->templates() . '/' . $definition->file;
+            self::assertFileExists($file);
+            $template = (string) file_get_contents($file);
+            foreach ($definition->blocks as $block) {
+                self::assertMatchesRegularExpression('/\{%-?\s*block\s+' . $block . '\b/', $template, $definition->file . ' defines ' . $block);
+            }
+        }
     }
 
     public function testTheShellIncludesCoresHeadPartial(): void

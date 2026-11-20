@@ -12,7 +12,8 @@ at 320 pixels and at 400% zoom, and honours reduced motion.
 - `theme.json`: the design tokens. They cover colours for light and dark mode (with "more contrast" overrides),
   chart colours, typography, spacing, radius and the focus ring, plus the colour pairs whose contrast core checks.
 - `templates/`: the Twig templates. These are the shell (`master.html.twig`), the layouts `default`, `home` and
-  `search`, and accessible partials: messages, the search form, buttons, alerts, cards, a dialog, a disclosure,
+  `search`, the standard layouts `landing`, `sidebar` (with a side column for the pages in a section) and
+  `full-width`, and accessible partials: messages, the search form, buttons, alerts, cards, a dialog, a disclosure,
   pagination and tables.
 - `assets/`: the stylesheet (`css/site.css`) and a small script (`js/site.js`) that only enhances pages that already
   work without it.

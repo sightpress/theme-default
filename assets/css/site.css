@@ -447,3 +447,20 @@ input[type=file] { max-width: 100%; }
   .chart__series--current line, .chart__series--previous line { stroke: CanvasText; }
   .chart__series--current circle, .chart__series--previous rect, .chart__bar { fill: CanvasText; }
 }
+
+/* Standard layouts (T-3): landing, sidebar and full width. */
+.hero--landing { padding-block: var(--space-6, var(--space-5)); }
+.layout-landing { padding-block: var(--space-4); }
+.layout-full-width > p, .layout-full-width > ul, .layout-full-width > ol { max-width: var(--font-measure); }
+.layout-sidebar { display: grid; gap: var(--space-5); padding-block: var(--space-4); }
+.layout-sidebar__main { min-width: 0; max-width: var(--font-measure); }
+.layout-sidebar__aside { border-top: 1px solid var(--color-border); padding-top: var(--space-3); }
+.layout-sidebar__aside h2 { font-size: 1.25rem; margin-top: 0; }
+.layout-sidebar__aside ul { padding-left: 1.25em; }
+@media (min-width: 60em) {
+  .layout-sidebar--with-aside { grid-template-columns: minmax(0, 1fr) minmax(14rem, 20rem); align-items: start; }
+  .layout-sidebar__aside { border-top: 0; border-left: 1px solid var(--color-border); padding: 0 0 0 var(--space-4); }
+}
+@media (forced-colors: active) {
+  .layout-sidebar__aside { border-color: CanvasText; }
+}

@@ -1,0 +1,19 @@
+{#
+    Full-width layout: the page title as the only <h1> and the lead, then `content` across the whole page width
+    instead of a reading column, for wide tables, galleries and columns. Text paragraphs keep a readable line length.
+    Context: `title` (required), `lead` (optional), `updated_at` (optional, UTC).
+#}
+{% extends 'master.html.twig' %}
+{% block title %}{{ title }}{% endblock %}
+{% block main %}
+<div class="container layout-full-width">
+    <h1>{{ title }}</h1>
+    {%- if lead is defined and lead is not empty %}
+    <p class="lead">{{ lead }}</p>
+    {%- endif %}
+    {% block content %}{% endblock %}
+    {%- if updated_at is defined and updated_at %}
+    <p class="page-updated">{{ t('Last updated') }} <time datetime="{{ updated_at|date('Y-m-d\\TH:i:s\\Z', 'UTC') }}">{{ updated_at|user_date }}</time></p>
+    {%- endif %}
+</div>
+{% endblock %}

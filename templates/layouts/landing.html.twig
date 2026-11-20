@@ -1,0 +1,24 @@
+{#
+    Landing layout: a wide introduction band with the page title as the only <h1>, the lead and the `hero` block (a
+    call to action), then `content` at full page width, for a campaign or an event page.
+    Context: `title` (required), `lead` (optional), `updated_at` (optional, UTC).
+#}
+{% extends 'master.html.twig' %}
+{% block title %}{{ title }}{% endblock %}
+{% block main %}
+<div class="hero hero--landing">
+    <div class="container">
+        <h1>{{ title }}</h1>
+        {%- if lead is defined and lead is not empty %}
+        <p class="lead">{{ lead }}</p>
+        {%- endif %}
+        {% block hero %}{% endblock %}
+    </div>
+</div>
+<div class="container layout-landing">
+    {% block content %}{% endblock %}
+    {%- if updated_at is defined and updated_at %}
+    <p class="page-updated">{{ t('Last updated') }} <time datetime="{{ updated_at|date('Y-m-d\\TH:i:s\\Z', 'UTC') }}">{{ updated_at|user_date }}</time></p>
+    {%- endif %}
+</div>
+{% endblock %}
