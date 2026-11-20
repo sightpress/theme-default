@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
-  COMPOSER_ROOT_VERSION: 0.2.x-dev
+  COMPOSER_ROOT_VERSION: 0.3.x-dev
 
 jobs:
   check:

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/sightpress/theme-default/compare/0.2.0...0.3.0) (2026-11-20)
+
+
+### Features
+
+* add the standard layouts landing, sidebar and full width (T-3) ([#6](https://github.com/sightpress/theme-default/issues/6)) ([4255e2f](https://github.com/sightpress/theme-default/commit/4255e2ff3152e5b3623d493abaeb459d6e6b6120))
+
 ## [0.2.0](https://github.com/sightpress/theme-default/compare/0.1.0...0.2.0) (2026-11-20)
 
 

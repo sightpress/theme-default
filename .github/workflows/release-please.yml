@@ -55,7 +55,7 @@ jobs:
     if: ${{ !cancelled() && (needs.release-please.outputs.release_created == 'true' || github.event_name == 'workflow_dispatch') }}
     runs-on: ubuntu-latest
     env:
-      COMPOSER_ROOT_VERSION: 0.2.x-dev
+      COMPOSER_ROOT_VERSION: 0.3.x-dev
       TAG: ${{ needs.release-please.outputs.tag_name || inputs.tag }}
     steps:
       - uses: actions/checkout@v7
