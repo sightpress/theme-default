@@ -14,4 +14,4 @@ permissions:
 
 jobs:
   comment:
-    uses: sightpress/theme-interface/.github/workflows/theme-preview-comment.yml@task/TI-0.2c-theme-preview-workflow
+    uses: sightpress/theme-interface/.github/workflows/theme-preview-comment.yml@0.2.1
