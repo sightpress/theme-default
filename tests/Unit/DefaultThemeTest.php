@@ -24,7 +24,7 @@ final class DefaultThemeTest extends TestCase
         self::assertSame('default', $manifest->id);
         self::assertSame('SightPress Default', $manifest->name);
         self::assertSame(DefaultTheme::VERSION, $manifest->version);
-        self::assertSame('^0.2', $manifest->requires->constraint);
+        self::assertSame('^0.2 || ^0.3', $manifest->requires->constraint);
         self::assertSame([...LayoutDefinition::REQUIRED, ...LayoutDefinition::STANDARD], array_map(static fn (LayoutDefinition $layout): string => $layout->id, $manifest->layouts));
         self::assertTrue($manifest->rightToLeft);
         self::assertNotNull($manifest->previewDescription);

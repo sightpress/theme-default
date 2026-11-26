@@ -28,7 +28,7 @@ final class DefaultTheme implements ThemeInterface
             name: 'SightPress Default',
             description: 'Calm greys and a strong blue on white, with large, readable type. Accessible in light and dark mode, with more contrast and in forced colours.',
             version: self::VERSION,
-            requires: new ThemeRequirement('^0.2'),
+            requires: new ThemeRequirement('^0.2 || ^0.3'),
             layouts: [...LayoutDefinition::required(), ...LayoutDefinition::standard()],
             rightToLeft: true,
             author: 'SightPress',
