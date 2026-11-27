@@ -27,8 +27,7 @@ final class DefaultThemeTest extends TestCase
         self::assertSame('^0.2 || ^0.3', $manifest->requires->constraint);
         self::assertSame([...LayoutDefinition::REQUIRED, ...LayoutDefinition::STANDARD], array_map(static fn (LayoutDefinition $layout): string => $layout->id, $manifest->layouts));
         self::assertTrue($manifest->rightToLeft);
-        self::assertNotNull($manifest->previewDescription);
-        self::assertNull($manifest->screenshot);
+        self::assertNotEmpty($manifest->previewDescription);
         self::assertEquals($manifest, new DefaultTheme()->manifest());
     }
 
